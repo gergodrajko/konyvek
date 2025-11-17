@@ -16,15 +16,18 @@ class Book {
     public function __construct(array $data = []) {
         foreach ($data as $key => $value) {
             if (property_exists($this, $key)) {
-                // Ha az érték numerikus, próbáljuk meg integerre konvertálni
-                if ($key === 'author_id' || $key === 'publisher_id' || $key === 'category_id') {
-                    $this->$key = (int)$value; // Az összes integer típusú mezőt konvertáljuk
+    
+                if (in_array($key, ['author_id', 'publisher_id', 'category_id', 'ratings', 'id'])) {
+                    $this->$key = $value !== '' ? (int)$value : null;
+    
                 } elseif ($key === 'price') {
-                    $this->$key = (float)$value; // A price float típusú, konvertáljuk
+                    $this->$key = (float)$value;
+    
                 } else {
                     $this->$key = $value;
                 }
             }
         }
     }
+    
 }

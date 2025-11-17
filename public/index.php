@@ -3,24 +3,42 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../controllers/BookController.php';
 
-$controller = new BookController();
-
 $action = $_GET['action'] ?? 'index';
 $id = isset($_GET['id']) ? (int)$_GET['id'] : null;
 
 switch ($action) {
+
     case 'create':
-        $controller->create();
+        (new BookController())->create();
         break;
+
     case 'edit':
         if (!$id) die("Hiányzó ID.");
-        $controller->edit($id);
+        (new BookController())->edit($id);
         break;
+
     case 'delete':
         if (!$id) die("Hiányzó ID.");
-        $controller->delete($id);
+        (new BookController())->delete($id);
         break;
+
+    /* 🔥 EZEKET KELL HOZZÁADNI */
+    case 'new_author':
+        require_once __DIR__ . '/../controllers/AuthorController.php';
+        (new AuthorController())->create();
+        break;
+
+    case 'new_publisher':
+        require_once __DIR__ . '/../controllers/PublisherController.php';
+        (new PublisherController())->create();
+        break;
+
+    case 'new_category':
+        require_once __DIR__ . '/../controllers/CategoryController.php';
+        (new CategoryController())->create();
+        break;
+
     default:
-        $controller->index();
+        (new BookController())->index();
         break;
 }

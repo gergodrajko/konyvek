@@ -3,6 +3,7 @@
 <h1>Új könyv hozzáadása</h1>
 
 <form method="post" enctype="multipart/form-data">
+
     <label>Cím:<br>
         <input type="text" name="title" required>
     </label><br>
@@ -32,8 +33,9 @@
             <option value="4">4</option>
             <option value="5">5</option>
         </select>
-    </label><br>
+    </label><br><br>
 
+    <!-- Szerző -->
     <label>Szerző:<br>
         <select name="author_id" required>
             <?php foreach ($data['authors'] as $author): ?>
@@ -41,7 +43,10 @@
             <?php endforeach; ?>
         </select>
     </label><br>
+    <a href="index.php?action=new_author">+ Új szerző hozzáadása</a>
+    <br><br>
 
+    <!-- Kiadó -->
     <label>Kiadó:<br>
         <select name="publisher_id" required>
             <?php foreach ($data['publishers'] as $publisher): ?>
@@ -49,7 +54,10 @@
             <?php endforeach; ?>
         </select>
     </label><br>
+    <a href="index.php?action=new_publisher">+ Új kiadó hozzáadása</a>
+    <br><br>
 
+    <!-- Kategória -->
     <label>Kategória:<br>
         <select name="category_id" required>
             <?php foreach ($data['categories'] as $category): ?>
@@ -57,6 +65,8 @@
             <?php endforeach; ?>
         </select>
     </label><br>
+    <a href="index.php?action=new_category">+ Új kategória hozzáadása</a>
+    <br><br>
 
     <button type="submit">Mentés</button>
 </form>
